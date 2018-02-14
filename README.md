@@ -19,8 +19,5 @@ The Following are some helpful links for learning more about Bot Framework
   - Consult ppt file for general instruction.
   - Simple Mathematical bot sample is added with flowchart in ppt.
 
-
-Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
-
 > For any queries, head over to our facebook page and drop a message
 > https://www.facebook.com/micvitvellore/
