@@ -19,5 +19,60 @@ The Following are some helpful links for learning more about Bot Framework
   - Consult ppt file for general instruction.
   - Simple Mathematical bot sample is added with flowchart in ppt.
 
+## Getting Started with creating bot-service on Azure
+
+ - Log in to Azure
+ - Click the New button found on the upper left-hand corner of the Azure portal, then select AI + Cognitive Services > Web App bot.
+ - A new blade will open with information about the Web App Bot. Click the Create button to start the bot creation process.
+ - In the Bot Service blade, provide the requested information about your bot as specified in the table below the image. 
+
+    ![](https://docs.microsoft.com/en-us/bot-framework/media/azure-bot-quickstarts/sdk-create-bot-service-blade.png)
+
+| Setting | Suggested value | Description |
+| --- | --- | --- |
+| Bot name | Your bot's display name | The display name for the bot that appears in channels and directories. This name can be changed at anytime. |
+| Subscription | Your subscription | Select the Azure subscription you want to use. |
+| Resource Group | myResourceGroup | You can create a new resource group or choose from an existing one. |
+| Location | The default location | Select the geographic location for your resource group. Your location choice can be any location listed, though it's often best to choose a location closest to your customer. The location cannot be changed once the bot is created. |
+| Pricing tier | F0 | Select a pricing tier. You may update the pricing tier at any time. For more information, see Bot Service pricing. |
+| App name | A unique name | The unique URL name of the bot. For example, if you name your bot myawesomebot, then your bot's URL will be http://myawesomebot.azurewebsites.net. The name must use alphanumeric and underscore characters only. There is a 35 character limit to this field. The App name cannot be changed once the bot is created. |
+| Bot template | Basic | Choose either C# or Node.js and select the Basic template for this quickstart, then click Select. The Basic template creates an echo bot. Learn more about the templates. |
+| App service plan/Location | Your app service plan | Select an app service plan location. Your location choice can be any location listed, though it's often best to choose a location closest to your customer. (Not available for Functions Bot.) |
+| Azure Storage | Your Azure storage account | You can create a new data storage account or use an existing one. By default, the bot will use Table Storage. |
+| Application Insights | On | Decide if you want to turn Application Insights On or Off. If you select On, you must also specify a regional location. Your location choice can be any location listed, though it's often best to choose a location closest to your customer. |
+| Microsoft App ID and password | Auto create App ID and password | Use this option if you need to manually enter a Microsoft App ID and password. Otherwise, a new Microsoft App ID and password will be created for you in the bot creation process. |
+
+ - Click Create to create the service and deploy the bot to the cloud. This process may take several minutes.
+ 
+
+## Create a bot with the Bot Builder SDK for .NET
+
+`The Bot Builder SDK for .NET currently supports C#. Visual Studio for Mac is not supported.`
+
+### Prerequisires
+
+ - Install Visual Studio 2017 for Windows.
+ - In Visual Studio, update all extensions to their latest versions.
+ - Download the Bot Application, Bot Controller, and Bot Dialog .zip files. Install the project template by copying Bot Application.zip to your Visual Studio 2017 project templates directory. Install the item templates by copying Bot Controller.zip and Bot Dialog.zip to your Visual Studio 2017 item templates directory.
+
+> The Visual Studio 2017 project templates directory is typically located at `%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#\` and the item templates directory is at `%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C#\`
+
+### Create your bot
+
+ - Open Visual Studio and create a new C# project. Choose the Bot Application template for your new project.
+ ![](https://docs.microsoft.com/en-us/bot-framework/media/connector-getstarted-create-project.png)
+
+  - By using the Bot Application template, you're creating a project that already contains all of the components that are       required to build a simple bot, including a reference to the Bot Builder SDK for .NET, `Microsoft.Bot.Builder`. Verify      that your project references the latest version of the SDK
+    1.  Right-click on the project and select **Manage NuGet Packages**.
+    2.  In the **Browse** tab, type "Microsoft.Bot.Builder".
+    3.  Locate the `Microsoft.Bot.Builder` package in the list of search results, and click the **Update** button for that package.
+    4.  Follow the prompts to accept the changes and update the package.
+
+ - Thanks to the Bot Application template, your project contains all of the code that's necessary to create the bot in this tutorial. You won't actually need to write any additional code. However, before we move on to testing your bot, take a quick look at some of the code that the Bot Application template provided.
+ 
+### Explore the code
+
+
+
 > For any queries, head over to our facebook page and drop a message
 > https://www.facebook.com/micvitvellore/
