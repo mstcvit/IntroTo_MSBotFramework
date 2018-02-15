@@ -72,7 +72,87 @@ The Following are some helpful links for learning more about Bot Framework
  
 ### Explore the code
 
+First, the `Post` method within **Controllers\MessagesController.cs** receives the message from the user and invokes the root dialog.
+
+    [BotAuthentication]
+    public class MessagesController : ApiController
+    {
+        /// <summary>
+        /// POST: api/Messages
+        /// Receive a message from a user and reply to it
+        /// </summary>
+        public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
+        {
+            if (activity.Type == ActivityTypes.Message)
+            {
+                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
+            }
+            else
+            {
+                HandleSystemMessage(activity);
+            }
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            return response;
+        }
+        ...
+    }
+
+The root dialog processes the message and generates a response. The `MessageReceivedAsync` method within **Dialogs\RootDialog.cs** sends a reply that echos back the user's message, prefixed with the text 'You sent' and ending in the text 'which was _##_ characters', where _##_ represents the number of characters in the user's message.
+
+    [Serializable]
+    public class RootDialog : IDialog<object>
+    {
+        public Task StartAsync(IDialogContext context)
+        {
+            context.Wait(MessageReceivedAsync);
+            return Task.CompletedTask;
+        }
+
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
+        {
+            var activity = await result as Activity;
+
+            // calculate something for us to return
+            int length = (activity.Text ?? string.Empty).Length;
+
+            // return our reply to the user
+            await context.PostAsync($"You sent {activity.Text} which was {length} characters");
+
+            context.Wait(MessageReceivedAsync);
+        }
+    }
+    
+### Test your bot
+
+Next, test your bot by using the [Bot Framework Emulator](../bot-service-debug-emulator) to see it in action. The emulator is a desktop application that lets you test and debug your bot on localhost or running remotely through a tunnel.
+
+First, you'll need to download and install the emulator. Click [here](https://emulator.botframework.com/) to download the emulator. After the download completes, launch the executable and complete the installation process.
+
+#### Start your bot
+After installing the emulator, start your bot in Visual Studio by using a browser as the application host. This Visual Studio screenshot shows that the bot will launch in Microsoft Edge when the run button is clicked.
+
+![](https://docs.microsoft.com/en-us/bot-framework/media/connector-getstarted-start-bot-locally.png)
+
+When you click the run button, Visual Studio will build the application, deploy it to localhost, and launch the web browser to display the application's **default.htm** page. For example, here's the application's **default.htm** page shown in Microsoft Edge:
+
+![](https://docs.microsoft.com/en-us/bot-framework/media/connector-getstarted-bot-running-localhost.png)
+
+>You can modify the **default.htm** file within your project to specify the name and description of your bot application.
+
+#### Start the emulator and connect your bot
+
+At this point, your bot is running locally. Next, start the emulator and then connect to your bot in the emulator:
+1.  Type `http://localhost:port-number/api/messages` into the address bar, where **port-number** matches the port number shown in the browser where your application is running.
+
+2.  Click **Connect**. You won't need to specify **Microsoft App ID** and **Microsoft App Password**. You can leave these fields blank for now. You'll get this information later when you [register your bot](../bot-service-quickstart-registration).
+
+>In the example shown above, the application is running on port number **3979**, so the emulator address would be set to: `http://localhost:3979/api/messages`.
+
+#### Test your bot
+
+Now that your bot is running locally and is connected to the emulator, test your bot by typing a few messages in the emulator. You should see that the bot responds to each message you send by echoing back your message prefixed with the text 'You sent' and ending with the text 'which was ## characters', where ## is the total number of characters in the message that you sent.+
 
 
-> For any queries, head over to our facebook page and drop a message
-> https://www.facebook.com/micvitvellore/
+
+> ### For any queries, head over to our facebook page and drop a message
+### https://www.facebook.com/micvitvellore/
